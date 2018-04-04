@@ -1,0 +1,43 @@
+<html>
+<!-- our basic 'shell' for javascript work -->
+    <head>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"></link>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+  	<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css"></link>
+    <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <h1>Rock Paper Scissors Dynamite</h1>
+        <!-- button to call the populateGameArray function -->
+        <input class='button' type="button" name="" value="Click Here To Play" id="startGame" onclick="populateGameArray()">
+        <br><br>
+
+
+        <div class="battleBox">
+          <div class="user">
+            <!-- div to hold the user choice -->
+            <div id='userChoice'></div>
+            <img class=img id='userImage'>
+          </div>
+
+          <div id="versus" class="versus"></div>
+          <!-- the box to hold the computer choices and pictures -->
+          <div class="computer">
+            <div id="computerChoice"></div>
+            <img class=img id='computerImage'>
+          </div>
+        </div>
+
+        <br>
+        <!-- div to hold the results of the game -->
+        <div class='results' id="results">
+
+        </div>
+
+    </body>
+
+
+</html>

@@ -1,0 +1,85 @@
+<!-- Great work here, Shawn.
+You've caught all the bugs and your
+app runs well.
+20/20
+-->
+
+<html>
+<!-- our basic 'shell' for javascript work -->
+    <head>
+        <!-- Ajax libs imported -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- JQueryUI libs imported -->
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"></link>
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css"></link>
+
+        <script>
+          $(document).ready(function(){
+						    $("#datepicker").datepicker();
+                // fix formatting for datepicker so it matches the format expected on NY Times site
+                $("#datepicker").on('change',function() {
+                    $( "#datepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+                });
+
+                // On the button click
+                $("#btnBooks").click(function(){
+                    // retrieve the selected date in the datepicker
+                    var pubDate = $("#datepicker").val();
+                    // there are no errors or bugs in the url
+                    var url = "https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=356b2af721894a5596ad05b7987fca7b&published_date=" + pubDate;
+
+                    // setup our AJAX request
+                    var xhttp = new XMLHttpRequest();
+
+                    // set up our AJAX event handler
+                    xhttp.onreadystatechange = function(){
+                        //check the state and status
+                        if(xhttp.readyState==4 && xhttp.status==200){
+                            var responseText = JSON.parse(xhttp.responseText);
+                            // call a function to output our book data
+                            outputBooks(responseText);
+                        }
+                    }
+
+                    // start our AJAX calls
+                    xhttp.open("GET",url,true);
+                    xhttp.send();
+
+                    // define our outputWeather function
+                    function outputBooks(bookData){
+                        var output = "";
+                        // This line below has no bugs
+                        var booksArray = bookData.results.lists[0].books;
+
+                        for(index=0;index<booksArray.length;index++){
+                          // put this url in a browser to see how the JSON is
+                          // formatted:
+                          //https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=bcbe55d8f2424c0db54b916f80e67321
+                          //http://developer.nytimes.com/books_api.json#/Console/GET/lists/overview.%7Bformat%7D
+                          // Only Retrieve the first book list (5 books total)
+                            output+="Title: " + booksArray[index].title + "<br/>" +
+                                "Author: " + booksArray[index].author + "<br/>" +
+                                "Description: " + booksArray[index].description + "<br/>" +
+                                " <img width='200px' src='" + booksArray[index].book_image + "'> <br/><br/>";
+                        }
+                        //document.getElementById("BooksInfo").innerHTML=output;
+                        $("#BooksInfo").html(output);
+                    }
+                })
+            })
+
+        </script>
+    </head>
+    <body>
+        Choose A Publishing Date: <input type="text" id="datepicker"/>
+        <button id="btnBooks">Get Books</button>
+        <br/><br/>
+
+        <h1>Books Info:</h1>
+        <br/>
+        <span name="BooksInfo" id="BooksInfo"></span>
+
+    </body>
+</html>

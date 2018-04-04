@@ -1,0 +1,47 @@
+
+body {
+    text-align: center;
+    background-color: lightblue;
+    padding-top: 40px;
+}
+
+.button {
+    font-size: 24px;
+    height: 80px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+}
+
+.battleBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 80px;
+}
+
+.versus {
+  font-size: 40px;
+  padding-top: 60px;
+}
+
+.computer {
+  padding-right: 300px;
+}
+
+.user {
+  padding-left: 300px;
+}
+
+.img {
+  margin-top: 20px;
+}
+
+.results {
+  margin-top: 40px;
+  font-size: 30px;
+}
